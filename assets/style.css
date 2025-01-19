@@ -31,7 +31,7 @@ body {
 .main-container {
     animation-iteration-count: 4;
     animation-duration: 150ms;
-    background-image: url("/assets/images/odin-logo.jpg");
+    background-image: url("images/odin-logo.jpg");
     background-size: cover;
     background-clip: border-box;
     position: relative;
