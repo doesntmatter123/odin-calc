@@ -91,7 +91,7 @@ percentageButton.addEventListener('click', () => {
   if (operator){
     result = operate(base, (percent / 100) * base, operator)
   } else {
-    result = percent / 100
+    result = operate(percent, 100, 'divide')
   }
   operator = ''
   outputField.textContent = result

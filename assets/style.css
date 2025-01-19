@@ -6,7 +6,7 @@
 }
 
 :root {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: bold;
 
 }
@@ -37,8 +37,8 @@ body {
     position: relative;
     background-color: #e4ebf0;
     background-blend-mode: difference;
-    width: 400px;
-    height: 500px;
+    width: 600px;
+    height: 700px;
     border-radius: 1rem;
 }
 
@@ -80,7 +80,7 @@ body {
     height: 100%;
     border: 2px solid black;
     border-radius: 10px;
-    font-size: 45px;
+    font-size: 1.5rem;
     text-align: right;
     padding: 0.5em 0.25em;
     align-content: center;
