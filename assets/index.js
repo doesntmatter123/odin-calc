@@ -1,4 +1,5 @@
 'use strict'
+const MAX_RESULT_LENGTH = 12
 const outputField = document.querySelector('.output')
 const numberButtons = document.querySelectorAll('.number-btn')
 const clearButton = document.querySelector('.clear-btn')
@@ -6,6 +7,37 @@ const plusMinusButton = document.querySelector('.plus-minus-btn')
 const operatorButtons = document.querySelectorAll('.operator')
 const percentageButton = document.querySelector('.percentage-btn')
 const dotButton = document.querySelector('.dot')
+
+const handleNumberClick = (e) => {
+  if (outputField.textContent.length >= MAX_RESULT_LENGTH) {
+    return
+  }
+  if (outputField.textContent === '0' || savedNumber ===
+    outputField.textContent) {
+    outputField.textContent = e.target.textContent
+  } else {
+    outputField.textContent += e.target.textContent
+  }
+}
+
+const handleOperatorClick = (e) => {
+  if (operator) {
+    // case where an operation is already in queue
+    outputField.textContent = operate(savedNumber, outputField.textContent,
+      operator)
+  }
+  savedNumber = outputField.textContent
+
+  if (e.target.id === 'equals-btn') {
+    operator = ''
+    return
+  }
+
+  operator = e.target.id
+  console.log(operator)
+}
+
+
 outputField.textContent = '0'
 let savedNumber = ''
 let operator = ''
@@ -25,6 +57,7 @@ const operations = {
         mainContainer.style.animationName = ''
       }, 1000)
       mainContainer.style.animationName = 'shift'
+      return numerator
     } else {
       return numerator / denominator
     }
@@ -65,44 +98,19 @@ percentageButton.addEventListener('click', () => {
 })
 // NUMBERS
 numberButtons.forEach((button) => {
-  button.addEventListener('click', (e) => {
-    if (outputField.textContent.length >= 11) {
-      return
-    }
-    if (outputField.textContent === '0' || savedNumber ===
-      outputField.textContent) {
-      outputField.textContent = button.textContent
-    } else {
-      outputField.textContent += button.textContent
-    }
-  })
-
+  button.addEventListener('click', handleNumberClick)
 })
 // OPERATORS: / * + -
-operatorButtons.forEach((button) => button.addEventListener('click', (e) => {
-  if (operator) {
-    // case where an operation is already in queue
-    outputField.textContent = operate(savedNumber, outputField.textContent,
-      operator)
-  }
-  savedNumber = outputField.textContent
-
-  if (button.id === 'equals-btn') {
-    operator = ''
-    return
-  }
-
-  operator = button.id
-}))
+operatorButtons.forEach(
+  (button) => button.addEventListener('click', handleOperatorClick))
 
 const operate = (number1, number2, operator) => {
   let result = +operations[operator](number1, number2).toFixed(4)
-  if (String(result).length >= 12) { // if the string is too long for the calc
+  if (String(result).length >= MAX_RESULT_LENGTH) { // if the string is too long for the calc
     return result.toExponential(4)
   }
   return result
 }
-
 
 
 
