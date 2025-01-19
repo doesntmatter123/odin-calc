@@ -77,7 +77,9 @@ clearButton.addEventListener('click', () => {
 })
 // .
 dotButton.addEventListener('click', () => {
-  outputField.textContent += '.'
+  if(!outputField.textContent.includes('.')){
+    outputField.textContent += '.'
+  }
 })
 // +-
 plusMinusButton.addEventListener('click', () => {
